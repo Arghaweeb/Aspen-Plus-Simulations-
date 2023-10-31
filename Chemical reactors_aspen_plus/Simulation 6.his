@@ -1,0 +1,288 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       OCTOBER 7, 2023     
+ VERSION: 39.0   Build 116                               SATURDAY    
+ INSTALLATION:                                           11:40:35 A.M.       
+
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           OCTOBER 7, 2023     
+   11:40:35 A.M.                          SATURDAY    
+   INPUT FILE: _2424lye.inm
+   RUN ID : _2424lye
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 39.0 at 11:40:35 Sat Oct 7, 2023
+          3    ;Directory C:\Users\argha\OneDrive\Documents\AspenTech\Aspen Plus V12.1  Runid _UNNAMED
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS ENG SHORT-LENGTH=in
+         11
+         12    DEF-STREAMS CONVEN ALL
+         13
+         14    MODEL-OPTION
+         15
+         16    DESCRIPTION "
+         17        Chemical Simulation with English Units :
+         18        F, psi, lb/hr, lbmol/hr, Btu/hr, cuft/hr.
+         19
+         20        Property Method: NRTL
+         21
+         22        Flow basis for input: Mole
+         23
+         24        Stream report composition: Mole flow
+         25        "
+         26
+         27    DATABANKS 'APV121 PURE39' / 'APV121 AQUEOUS' / 'APV121 SOLIDS' &
+         28             / 'APV121 INORGANIC' / 'APESV121 AP-EOS' /  &
+         29            'NISTV121 NIST-TRC' / NOASPENPCD
+         30
+         31    PROP-SOURCES 'APV121 PURE39' / 'APV121 AQUEOUS' /  &
+         32            'APV121 SOLIDS' / 'APV121 INORGANIC' / 'APESV121 AP-EOS' &
+         33             / 'NISTV121 NIST-TRC'
+         34
+         35    COMPONENTS
+         36        ETHYLENE C2H4 /
+         37        BENZENE C6H6 /
+         38        EB C8H10-4
+         39
+         40    SOLVE
+         41        RUN-MODE MODE=SIM
+         42
+         43    FLOWSHEET
+         44        BLOCK RCSTR IN=B E OUT=EB
+         45
+         46    PROPERTIES CHAO-SEA
+         47        PROPERTIES NRTL
+         48
+         49    STREAM B
+         50        SUBSTREAM MIXED TEMP=300. <K> PRES=15. <atm>  &
+         51            MOLE-FLOW=100. <kmol/hr>
+         52        MOLE-FRAC ETHYLENE 0. / BENZENE 1. / EB 0.
+         53
+         54    STREAM E
+         55        SUBSTREAM MIXED TEMP=298. <K> PRES=15. <atm>  &
+         56            MOLE-FLOW=50. <kmol/hr>
+         57        MOLE-FLOW ETHYLENE 1. / BENZENE 0. / EB 0.
+         58
+         59    BLOCK RCSTR RCSTR
+         60        PARAM VOL=0.1 <cum> TEMP=400. <K> PRES=10. <atm> NPHASE=1  &
+         61            PHASE=L
+         62        BLOCK-OPTION FREE-WATER=NO
+         63        REACTIONS RXN-IDS=R-1
+         64
+         65    DESIGN-SPEC DS-1
+         66        DEFINE EIN MOLE-FLOW STREAM=E SUBSTREAM=MIXED  &
+         67            COMPONENT=ETHYLENE UOM="kmol/hr"
+         68        DEFINE EOUT MOLE-FLOW STREAM=EB SUBSTREAM=MIXED  &
+         69            COMPONENT=ETHYLENE UOM="kmol/hr"
+         70        SPEC "(EIN-EOUT)/EIN" TO "0.98"
+         71        TOL-SPEC "0.0001"
+         72        VARY BLOCK-VAR BLOCK=RCSTR VARIABLE=VOL SENTENCE=PARAM UOM= &
+         73            "cum"
+         74        LIMITS "0.1" "2" STEP-SIZE=0.1
+         75
+         76    EO-CONV-OPTI
+         77
+         78    STREAM-REPOR MOLEFLOW
+         79
+         80    REACTIONS R-1 POWERLAW
+         81        REAC-DATA 1
+         82        RATE-CON 1 PRE-EXP=152800000. ACT-ENERGY=71129000. <J/kmol>
+         83        STOIC 1 MIXED ETHYLENE -1. / BENZENE -1. / EB 1.
+         84        POWLAW-EXP 1 MIXED ETHYLENE 1. / MIXED BENZENE 1.
+         85    ;
+         86    ;
+         87    ;
+         88    ;
+         89    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV121 : (DATAVERSION - 39.0.0.5)                          
+      SQLLOCALDB.APV121 : (DATAVERSION - 39.0.0.3)                            
+      SQLLOCALDB.FACTV121 : (DATAVERSION - 39.0.0.3)                          
+      SQLLOCALDB.NISTV121 : (DATAVERSION - 39.0.0.3)                          
+
+  *   WARNING IN THE "STREAM" PARAGRAPH WHICH BEGINS ON LINE 54                 
+      STREAM NAME: E                                           (STSTRM.29)      
+      COMPONENT MOLE FLOWS OF SUBSTREAM: "MIXED"                                
+      ARE NORMALIZED TO THE TOTAL MOLE FLOW VALUE.                              
+ 
+ DESIGN SPEC: DS-1 WILL BE INTERPRETED 
+ 
+
+ PDF updated                                                                      TIME =      1.04
+
+  *   WARNING IN PHYSICAL PROPERTY SYSTEM WHILE INITIALIZING PROPERTY MODELS    
+                                                               (GM05I.1)        
+      NRTL BINARY PARAMETERS FOR ALL COMPONENT PAIRS ARE ZERO,                  
+      YOUR RESULTS MAY NOT BE ACCURATE. PLEASE REVIEW AND PROVIDE BINARY        
+      PARAMETERS AS APPROPRIATE.                                                
+
+ *** CALCULATION TRACE ***
+
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   E          ----       RCSTR          B          ----       RCSTR   
+   EB         RCSTR      ----                                         
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   RCSTR        B E                            EB                          
+
+      BLOCK $OLVER01 (METHOD: SECANT  ) HAS BEEN DEFINED TO CONVERGE
+                SPECS : DS-1
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      $OLVER01 RCSTR 
+      (RETURN $OLVER01) 
+
+Calculations begin                                                              time      0.02
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      0.02
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.02
+     SPECS: DS-1
+
+      ENTHALPY CALCULATION FOR INLET STREAM B OF BLOCK RCSTR                      TIME =      0.02
+      KODE = 2  NTRIAL =   1  T = 300.0000  P = 1.519875E+06  V =  0.00000      Q =  0.00000    
+
+      ENTHALPY CALCULATION FOR INLET STREAM E OF BLOCK RCSTR                      TIME =      0.02
+      KODE = 2  NTRIAL =   1  T = 298.0000  P = 1.519875E+06  V =  1.00000      Q =  0.00000    
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.02
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  400.000    
+      KPHASE =    2 KODE =    2 T =  400.000     P = 1.013250E+06 Q = -957147.    
+      REACTOR DUTY =  -957147.      VOLUME =  0.100000      RES TIME =   29.3216    
+      REACTOR T =   400.000      P =  1.013250E+06  V =   0.00000    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.02
+      ITER   0 For Specs:        DS-1
+      SPEC   1 ERROR = -0.69069E-01 OLD X =  0.10000     NEW X =  0.29000    
+
+  LOOP $OLVER01 ITER    1:   1 VARS NOT CONVERGED, MAX ERR/TOL     -690.69        TIME =      0.02
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.02
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  400.000    
+      KPHASE =    2 KODE =    2 T =  400.000     P = 1.013250E+06 Q =-1.040066E+06
+      REACTOR DUTY = -0.104007E+07  VOLUME =  0.290000      RES TIME =   85.8704    
+      REACTOR T =   400.000      P =  1.013250E+06  V =   0.00000    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.03
+      ITER   2 For Specs:        DS-1
+      SPEC   1 ERROR = -0.13661E-01 OLD X =  0.29000     NEW X =  0.33685    
+
+  LOOP $OLVER01 ITER    2:   1 VARS NOT CONVERGED, MAX ERR/TOL     -136.61        TIME =      0.03
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.03
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  400.000    
+      KPHASE =    2 KODE =    2 T =  400.000     P = 1.013250E+06 Q =-1.046753E+06
+      REACTOR DUTY = -0.104675E+07  VOLUME =  0.336847      RES TIME =   99.8213    
+      REACTOR T =   400.000      P =  1.013250E+06  V =   0.00000    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.03
+      ITER   3 For Specs:        DS-1
+      SPEC   1 ERROR = -0.91938E-02 OLD X =  0.33685     NEW X =  0.37321    
+
+  LOOP $OLVER01 ITER    3:   1 VARS NOT CONVERGED, MAX ERR/TOL     -91.938        TIME =      0.03
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.03
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  400.000    
+      KPHASE =    2 KODE =    2 T =  400.000     P = 1.013250E+06 Q =-1.050834E+06
+      REACTOR DUTY = -0.105083E+07  VOLUME =  0.373215      RES TIME =   110.652    
+      REACTOR T =   400.000      P =  1.013250E+06  V =   0.00000    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.03
+      ITER   4 For Specs:        DS-1
+      SPEC   1 ERROR = -0.64675E-02 OLD X =  0.37321     NEW X =  0.44803    
+
+  LOOP $OLVER01 ITER    4:   1 VARS NOT CONVERGED, MAX ERR/TOL     -64.675        TIME =      0.03
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.03
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  400.000    
+      KPHASE =    2 KODE =    2 T =  400.000     P = 1.013250E+06 Q =-1.057217E+06
+      REACTOR DUTY = -0.105722E+07  VOLUME =  0.448027      RES TIME =   132.934    
+      REACTOR T =   400.000      P =  1.013250E+06  V =   0.00000    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.03
+      ITER   5 For Specs:        DS-1
+      SPEC   1 ERROR = -0.22031E-02 OLD X =  0.44803     NEW X =  0.51163    
+
+  LOOP $OLVER01 ITER    5:   1 VARS NOT CONVERGED, MAX ERR/TOL     -22.031        TIME =      0.03
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.03
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  400.000    
+      KPHASE =    2 KODE =    2 T =  400.000     P = 1.013250E+06 Q =-1.061220E+06
+      REACTOR DUTY = -0.106122E+07  VOLUME =  0.511634      RES TIME =   151.879    
+      REACTOR T =   400.000      P =  1.013250E+06  V =   0.00000    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.04
+      ITER   6 For Specs:        DS-1
+      SPEC   1 ERROR =  0.47151E-03 OLD X =  0.51163     NEW X =  0.49874    
+
+  LOOP $OLVER01 ITER    6:   1 VARS NOT CONVERGED, MAX ERR/TOL      4.7151        TIME =      0.04
+
+      UOS BLOCK RCSTR    MODEL: RCSTR                                             TIME =      0.04
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  400.000    
+      KPHASE =    2 KODE =    2 T =  400.000     P = 1.013250E+06 Q =-1.060489E+06
+      REACTOR DUTY = -0.106049E+07  VOLUME =  0.498741      RES TIME =   148.039    
+      REACTOR T =   400.000      P =  1.013250E+06  V =   0.00000    
+
+      CONVERGENCE BLOCK $OLVER01  METHOD: SECANT                                  TIME =      0.04
+      ITER   7 For Specs:        DS-1
+      SPEC   1 ERROR = -0.17230E-04                          X =  0.49874    
+
+  LOOP $OLVER01 ITER    7:     *** CONVERGED *** , MAX ERR/TOL    -0.17230        TIME =      0.04
+
+ Report Writer entered                                                            Time =      0.06
+
+ Results generated                                                                Time =      0.07
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         0
+        WARNINGS      1        0         0

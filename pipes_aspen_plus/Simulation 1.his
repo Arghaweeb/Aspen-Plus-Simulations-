@@ -1,0 +1,191 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       OCTOBER 6, 2023     
+ VERSION: 39.0   Build 116                               FRIDAY      
+ INSTALLATION:                                           10:43:20 P.M.       
+
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           OCTOBER 6, 2023     
+   10:43:20 P.M.                          FRIDAY      
+   INPUT FILE: _3431cmu.inm
+   RUN ID : _3431cmu
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 39.0 at 22:43:20 Fri Oct 6, 2023
+          3    ;Directory C:\Users\argha\OneDrive\Documents\AspenTech\Aspen Plus V12.1  Runid _UNNAMED
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS ENG SHORT-LENGTH=in
+         11
+         12    DEF-STREAMS CONVEN ALL
+         13
+         14    DESCRIPTION "
+         15        Chemical Simulation with English Units :
+         16        F, psi, lb/hr, lbmol/hr, Btu/hr, cuft/hr.
+         17
+         18        Property Method: NRTL
+         19
+         20        Flow basis for input: Mole
+         21
+         22        Stream report composition: Mole flow
+         23        "
+         24
+         25    DATABANKS 'APV121 PURE39' / 'APV121 AQUEOUS' / 'APV121 SOLIDS' &
+         26             / 'APV121 INORGANIC' / 'APESV121 AP-EOS' /  &
+         27            'NISTV121 NIST-TRC' / NOASPENPCD
+         28
+         29    PROP-SOURCES 'APV121 PURE39' / 'APV121 AQUEOUS' /  &
+         30            'APV121 SOLIDS' / 'APV121 INORGANIC' / 'APESV121 AP-EOS' &
+         31             / 'NISTV121 NIST-TRC'
+         32
+         33    COMPONENTS
+         34        WATER H2O
+         35
+         36    SOLVE
+         37        RUN-MODE MODE=SIM
+         38
+         39    FLOWSHEET
+         40        BLOCK TANK1 IN=1 OUT=2
+         41        BLOCK PUMP1 IN=2 OUT=3
+         42        BLOCK PIPE1 IN=3 OUT=4
+         43        BLOCK TANK2 IN=4 OUT=5
+         44
+         45    PROPERTIES STEAMNBS FREE-WATER=STEAMNBS
+         46        PROPERTIES NRTL
+         47
+         48    STREAM 1
+         49        SUBSTREAM MIXED TEMP=25. <C> PRES=1. <atm>  &
+         50            MASS-FLOW=36000. <kg/hr>
+         51        MASS-FRAC WATER 1.
+         52
+         53    BLOCK TANK1 MIXER
+         54        PARAM
+         55
+         56    BLOCK TANK2 MIXER
+         57        PARAM
+         58
+         59    BLOCK PUMP1 PUMP
+         60        PARAM PRES=16. <atm> SUCT-AREA=506.7 <sqm>
+         61
+         62    BLOCK PIPE1 PIPE
+         63        PARAM LENGTH=2000. <meter> MATERIAL="CARBON-STEEL" SCHEDULE &
+         64            ="40" NOMINAL-DIAM="6-IN" IN-DIAM=.1540510000 <meter>  &
+         65            ROUGHNESS=1.50000000E-4 NPHASE=1 PHASE=L CALCDIA=0
+         66        FITTINGS CONNECTIONS=SCREWED ELBOWS=12 STRAIGHT-TEE=20  &
+         67            GATE-VALVES=4 BUTTERFLY-VA=2
+         68        BLOCK-OPTION FREE-WATER=NO
+         69
+         70    EO-CONV-OPTI
+         71
+         72    STREAM-REPOR MOLEFLOW
+         73    ;
+         74    ;
+         75    ;
+         76    ;
+         77    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV121 : (DATAVERSION - 39.0.0.5)                          
+      SQLLOCALDB.APV121 : (DATAVERSION - 39.0.0.3)                            
+      SQLLOCALDB.FACTV121 : (DATAVERSION - 39.0.0.3)                          
+      SQLLOCALDB.NISTV121 : (DATAVERSION - 39.0.0.3)                          
+ 
+ 
+
+ PDF updated                                                                      TIME =      1.02
+
+ *** CALCULATION TRACE ***
+
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   1          ----       TANK1          2          TANK1      PUMP1   
+   3          PUMP1      PIPE1          4          PIPE1      TANK2   
+   5          TANK2      ----                                         
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   TANK1        1                              2                           
+   PUMP1        2                              3                           
+   PIPE1        3                              4                           
+   TANK2        4                              5                           
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      TANK1 PUMP1 PIPE1 TANK2 
+
+Calculations begin                                                              time      0.24
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      0.24
+
+      ENTHALPY CALCULATION FOR INLET STREAM 1 OF BLOCK TANK1                      TIME =      0.24
+      KODE = 2  NTRIAL =   1  T = 298.1500  P =  101325.      V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK TANK1    MODEL: MIXER                                             TIME =      0.24
+      NO. TEMP ITER =    5     TEMP =  298.150    
+      KODE = 1  NTRIAL =   2  T = 298.1500  P =  101325.      V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK PUMP1    MODEL: PUMP                                              TIME =      0.26
+      VOL-FLOW   =  0.1003E-01 , DELTA P    =  0.1520E+07 , PUMP EFF   =  0.5930    
+      FLUID PWR  =  0.1524E+05 , BRAKE PWR  =  0.2571E+05 , ELEC PWR   =  0.2571E+05
+
+      UOS BLOCK PIPE1    MODEL: PIPE                                              TIME =      0.26
+      KODE = 1   NO. TEMP ITER =    3     TEMP =  298.429    
+      KPHASE =    2 KODE =    1 T =  298.429     P = 1.621200E+06 Q =  0.00000    
+      KODE = 2   NO. TEMP ITER =    1     TEMP =  298.429    
+      KPHASE =    2 KODE =    2 T =  298.429     P = 1.582118E+06 Q =-0.341179    
+
+      UOS BLOCK TANK2    MODEL: MIXER                                             TIME =      0.26
+      NO. TEMP ITER =    5     TEMP =  298.429    
+      KODE = 1  NTRIAL =   2  T = 298.4289  P = 1.582118E+06  V =  0.00000      Q =  0.00000    
+
+      GENERATING RESULTS FOR UOS BLOCK PUMP1    MODEL: PUMP                       TIME =      0.26
+      KODE = 5  NTRIAL =   2  T = 298.1500  P =  3169.05      V =  0.00000      Q = -908.338    
+      VOL-FLOW   =  0.1003E-01 , DELTA P    =  0.1520E+07 , PUMP EFF   =  0.5930    
+      FLUID PWR  =  0.1524E+05 , BRAKE PWR  =  0.2571E+05 , ELEC PWR   =  0.2571E+05
+      NPSH AVAIL =   98.45    
+
+ Report Writer entered                                                            Time =      0.27
+
+ Results generated                                                                Time =      0.32
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED

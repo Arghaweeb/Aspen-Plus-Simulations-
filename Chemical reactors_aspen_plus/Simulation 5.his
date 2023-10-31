@@ -1,0 +1,181 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       OCTOBER 7, 2023     
+ VERSION: 39.0   Build 116                               SATURDAY    
+ INSTALLATION:                                           10:59:57 A.M.       
+
+ THIS COPY OF ASPEN PLUS LICENSED TO INDIAN INSTITUTE OF TECH        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           OCTOBER 7, 2023     
+   10:59:57 A.M.                          SATURDAY    
+   INPUT FILE: _4942lye.inm
+   RUN ID : _4942lye
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 39.0 at 10:59:57 Sat Oct 7, 2023
+          3    ;Directory C:\Users\argha\OneDrive\Documents\AspenTech\Aspen Plus V12.1  Runid _UNNAMED
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS ENG SHORT-LENGTH=in
+         11
+         12    DEF-STREAMS CONVEN ALL
+         13
+         14    MODEL-OPTION
+         15
+         16    DESCRIPTION "
+         17        Chemical Simulation with English Units :
+         18        F, psi, lb/hr, lbmol/hr, Btu/hr, cuft/hr.
+         19
+         20        Property Method: NRTL
+         21
+         22        Flow basis for input: Mole
+         23
+         24        Stream report composition: Mole flow
+         25        "
+         26
+         27    DATABANKS 'APV121 PURE39' / 'APV121 AQUEOUS' / 'APV121 SOLIDS' &
+         28             / 'APV121 INORGANIC' / 'APESV121 AP-EOS' /  &
+         29            'NISTV121 NIST-TRC' / NOASPENPCD
+         30
+         31    PROP-SOURCES 'APV121 PURE39' / 'APV121 AQUEOUS' /  &
+         32            'APV121 SOLIDS' / 'APV121 INORGANIC' / 'APESV121 AP-EOS' &
+         33             / 'NISTV121 NIST-TRC'
+         34
+         35    COMPONENTS
+         36        ETHANE C2H6 /
+         37        ETHYLENE C2H4 /
+         38        HYDROGEN H2
+         39
+         40    SOLVE
+         41        RUN-MODE MODE=SIM
+         42
+         43    FLOWSHEET
+         44        BLOCK RPLUG IN=FEED OUT=PRODUCT
+         45
+         46    PROPERTIES SYSOP0
+         47        PROPERTIES NRTL
+         48
+         49    STREAM FEED
+         50        SUBSTREAM MIXED TEMP=1100. <K> PRES=6. <atm>  &
+         51            MOLE-FLOW=694. <kmol/hr>
+         52        MOLE-FRAC ETHANE 1. / ETHYLENE 0. / HYDROGEN 0.
+         53
+         54    BLOCK RPLUG RPLUG
+         55        PARAM TYPE=T-SPEC LENGTH=10. DIAM=3.
+         56        REACTIONS RXN-IDS=R-1
+         57
+         58    EO-CONV-OPTI
+         59
+         60    STREAM-REPOR MOLEFLOW
+         61
+         62    REACTIONS R-1 POWERLAW
+         63        REAC-DATA 1 PHASE=V
+         64        RATE-CON 1 PRE-EXP=0.072 ACT-ENERGY=82. <kcal/mol>  &
+         65            T-REF=1000. <K>
+         66        STOIC 1 MIXED ETHANE -1. / ETHYLENE 1. / HYDROGEN 1.
+         67        POWLAW-EXP 1 MIXED ETHANE 1.
+         68    ;
+         69    ;
+         70    ;
+         71    ;
+         72    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV121 : (DATAVERSION - 39.0.0.5)                          
+      SQLLOCALDB.APV121 : (DATAVERSION - 39.0.0.3)                            
+      SQLLOCALDB.FACTV121 : (DATAVERSION - 39.0.0.3)                          
+      SQLLOCALDB.NISTV121 : (DATAVERSION - 39.0.0.3)                          
+
+      INFORMATION WHILE CHECKING INPUT SPECIFICATIONS                           
+      BLOCK NAME: RPLUG    MODEL NAME: RPLUG                   (ZURE04.21)      
+      THE REACTOR TYPE IS "SPECIFIED TEMPERATURE" AND NO TEMPERATURE            
+      IS GIVEN WITH A "T-SPEC" SENTENCE. THE REACTOR TEMPERATURE                
+      WILL BE SET TO THE (MIXED) INLET TEMPERATURE.                             
+ 
+ 
+
+ PDF updated                                                                      TIME =      0.85
+
+  *   WARNING IN PHYSICAL PROPERTY SYSTEM WHILE INITIALIZING PROPERTY MODELS    
+                                                               (GM05I.1)        
+      NRTL BINARY PARAMETERS FOR ALL COMPONENT PAIRS ARE ZERO,                  
+      YOUR RESULTS MAY NOT BE ACCURATE. PLEASE REVIEW AND PROVIDE BINARY        
+      PARAMETERS AS APPROPRIATE.                                                
+
+ *** CALCULATION TRACE ***
+
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   FEED       ----       RPLUG          PRODUCT    RPLUG      ----    
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   RPLUG        FEED                           PRODUCT                     
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      RPLUG 
+
+Calculations begin                                                              time      0.23
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      0.23
+
+      ENTHALPY CALCULATION FOR INLET STREAM FEED OF BLOCK RPLUG                   TIME =      0.23
+      KODE = 2  NTRIAL =   1  T =1100.0000  P =  607950.      V =  1.00000      Q =  0.00000    
+
+      UOS BLOCK RPLUG    MODEL: RPLUG                                             TIME =      0.23
+        AT REACTOR EXIT :
+        LENGTH =   3.0480      DIAMETER =  0.91440      RESIDENCE TIME =  0.46933    
+        PROCESS STREAM T =    1100.0     P =   0.60795E+06 H =   0.19835E+08 V =    1.0000    
+
+ Report Writer entered                                                            Time =      0.89
+
+ Results generated                                                                Time =      0.90
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         0
+        WARNINGS      1        0         0
